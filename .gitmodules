@@ -1,0 +1,12 @@
+[submodule "config/includes.chroot/etc/skel"]
+	path = config/includes.chroot/etc/skel
+	url = https://github.com/Prototype-Linux/skel.git
+[submodule "config/package-lists"]
+	path = config/package-lists
+	url = https://github.com/Prototype-Linux/package-lists.git
+[submodule "config/hooks/normal"]
+	path = config/hooks/normal
+	url = https://github.com/Prototype-Linux/hooks.git
+[submodule "lb-config"]
+	path = lb-config
+	url = https://github.com/Prototype-Linux/lb-config
