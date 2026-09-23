@@ -10,3 +10,6 @@
 [submodule "config/includes.chroot"]
 	path = config/includes.chroot
 	url = https://github.com/Prototype-Linux/branding.git
+[submodule "config/includes.installer"]
+	path = config/includes.installer
+	url = https://github.com/Prototype-Linux/installer

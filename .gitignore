@@ -1,4 +1,12 @@
 .build/
 cache/
+Prototype-amd64.contents
+Prototype-amd64.files
+Prototype-amd64.hybrid.iso
+Prototype-amd64.packages
+binary.modified_timestamps
+binary/
+chroot.files
+chroot.packages.live
 chroot.packages.install
 chroot/
