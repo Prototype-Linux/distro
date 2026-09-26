@@ -1,0 +1,49 @@
+name: Build
+
+on:
+  push:
+    branches: [ "**" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: debian:13
+      options: --privileged
+    steps:
+      - name: Install git
+        run: |
+          apt-get update
+          apt-get install -y git ca-certificates
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install -y live-build schroot
+
+      - name: Configure build
+        run: |
+          chmod +x lb-config/lb_config_prototype.sh
+          ./lb-config/lb_config_prototype.sh
+
+      - name: Run lb build
+        run: lb build
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: prototype-build-${{ github.sha }}
+          path: |
+            *.iso
+            *.img
+            *.hybrid.iso
+            *.contents
+            *.packages
+          if-no-files-found: warn
+          retention-days: 90
