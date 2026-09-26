@@ -13,3 +13,6 @@
 [submodule "config/includes.installer"]
 	path = config/includes.installer
 	url = https://github.com/Prototype-Linux/installer
+[submodule "config/bootloaders"]
+	path = config/bootloaders
+	url = https://github.com/Prototype-Linux/bootloaders
