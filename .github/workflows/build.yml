@@ -29,7 +29,40 @@ jobs:
       - name: Install dependencies
         run: |
           apt-get update
-          apt-get install -y live-build schroot
+          apt-get install -y \
+            live-build \
+            schroot \
+            debootstrap \
+            squashfs-tools \
+            xorriso \
+            isolinux \
+            syslinux-common \
+            syslinux-efi \
+            grub-efi-amd64-bin \
+            grub-pc-bin \
+            grub-common \
+            mtools \
+            dosfstools \
+            zstd \
+            eatmydata \
+            wget \
+            gnupg
+
+      - name: Cache apt archives
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/apt/archives
+          key: apt-${{ runner.os }}-${{ hashFiles('lb-config/**') }}
+          restore-keys: |
+            apt-${{ runner.os }}-
+
+      - name: Cache live-build packages
+        uses: actions/cache@v4
+        with:
+          path: cache/packages.binary
+          key: lb-cache-${{ runner.os }}-${{ hashFiles('lb-config/**') }}
+          restore-keys: |
+            lb-cache-${{ runner.os }}-
 
       - name: Configure build
         run: |
@@ -37,7 +70,7 @@ jobs:
           ./lb-config/lb_config_prototype.sh
 
       - name: Run lb build
-        run: lb build
+        run: eatmydata lb build
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
