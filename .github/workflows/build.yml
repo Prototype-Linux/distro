@@ -40,9 +40,10 @@ jobs:
         run: lb build
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: prototype-build-${{ github.sha }}
+          name: Prototype-amd64.hybrid.iso
           path: "*.iso"
           if-no-files-found: warn
           retention-days: 90
+          archive: false
