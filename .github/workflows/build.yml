@@ -5,6 +5,10 @@ on:
     branches: [ "**" ]
   workflow_dispatch:
 
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -36,14 +40,10 @@ jobs:
         run: lb build
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: prototype-build-${{ github.sha }}
-          path: |
-            *.iso
-            *.img
-            *.hybrid.iso
-            *.contents
-            *.packages
+          name: Prototype-amd64.hybrid.iso
+          path: "*.iso"
           if-no-files-found: warn
           retention-days: 90
+          archive: false
